@@ -11,6 +11,57 @@ our $VERSION = '0.01';
 
 # Preloaded methods go here.
 
+
+#! /usr/bin/perl
+use v5.30;
+use warnings;
+use strict;
+
+use Archive::Tar;
+use MIME::Base64;
+use Getopt::Long;
+use File::Find;
+use Cwd;
+
+# Usage
+# --output Name of the resulting self extracting archive
+# --script Name of a script to run after decompressing and extracting the archive
+# --files everything after this is taken to be files that are to be in the archive
+# --dir Use this in place of --files if the files are in a directory. 
+# if --files and --dir are specified, all specified files as well as those in the directories are archived
+# If neither --dir nor --files is specified, the list of files is read in from <STDIN>
+
+# If --output is not specified, then the output is out.pl
+
+# Try in the following order
+# XZ
+# BZIP2
+# GZIP
+
+my $output = '';
+my $script = '';
+my $dir = '';
+my @files;
+
+GetOptions(
+    'output=s' => \$output,
+    'script=s' => \$script,
+    'dir=s' => \$dir,
+    'files=s{,}' => \@files
+);
+
+$output ||= 'out.pl';
+my @dirs = ($dir) if $dir;
+find(\&wanted, @dirs);
+
+my $tar = Archive::Tar->new;
+$tar->create_archive($output, COMPRESS_BZIP, @files);
+
+sub wanted {
+    push @files, $File::Find::name
+}
+
+
 1;
 __END__
 # Below is stub documentation for your module. You'd better edit it!
