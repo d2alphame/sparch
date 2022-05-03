@@ -51,11 +51,29 @@ my $tar = Archive::Tar->new;
 $tar->create_archive($temp_file, $compression, @files);
 #say $tar->error();
 
+# Open the "$output" file for writing
+open(my $outfile, '>>', $output) or die "Cannot open $output: $!";
+print $outfile <<"EOF";
+#! /usr/bin/perl
+use v5.30;
+use strict;
+use warnings;
+use Archive::Tar;
+
+my \$compression = $compression;
+my \$filename = $temp_file;
+
+
+# Attached tar archive compressed and base64 encoded
+__DATA__
+EOF
+
+
 
 open (my $temp_handle, '<', $temp_file);
 binmode $temp_handle;
 while(read $temp_handle, my $buffer, 65536) {
-  print encode_base64($buffer);
+  print $outfile encode_base64($buffer, '');
 }
 
 # Sub routine to be used by Find::File
@@ -110,7 +128,7 @@ If you have a web site set up for your module, mention it here.
 
 =head1 AUTHOR
 
-Deji Adegbite, E<lt>dejiadegbite@p1s.plx.sd.apple.comE<gt>
+Deji Adegbite, E<lt>contact@dejiadegbite.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
