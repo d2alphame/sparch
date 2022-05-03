@@ -24,13 +24,6 @@ use Cwd;
 # if --files and --dir are specified, all specified files as well as those in the directories are archived
 # If neither --dir nor --files is specified, the list of files is read in from <STDIN>
 
-# If --output is not specified, then the output is out.pl
-
-# Try in the following order
-# XZ
-# BZIP2
-# GZIP
-
 my $compression;
 my $output = '';
 my $script = '';
@@ -49,9 +42,9 @@ GetOptions(
     'files=s{,}' => \@files
 );
 
-$output ||= 'out.pl';
-$output .= '.pl' if($output !~ /\.pl$/);
+$output ||= 'out.pl';             # If --output (or -o) is not specifided, default to 'out.pl'
 
+# If --dir is specified, get all files from that directory. This needs to be 
 if($dir) { my @dirs = ($dir); find(\&wanted, @dirs) }
 
 #my $tar = Archive::Tar->new;
