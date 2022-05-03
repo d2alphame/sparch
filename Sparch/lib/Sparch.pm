@@ -54,7 +54,9 @@ $tar->create_archive($temp_file, $compression, @files);
 
 open (my $temp_handle, '<', $temp_file);
 binmode $temp_handle;
-
+while(read $temp_handle, my $buffer, 65536) {
+  print encode_base64($buffer);
+}
 
 # Sub routine to be used by Find::File
 sub wanted {
