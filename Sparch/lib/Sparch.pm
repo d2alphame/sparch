@@ -10,13 +10,6 @@ our $VERSION = '0.01';
 
 
 # Preloaded methods go here.
-
-
-#! /usr/bin/perl
-use v5.30;
-use warnings;
-use strict;
-
 use Archive::Tar;
 use MIME::Base64;
 use Getopt::Long;
@@ -38,11 +31,17 @@ use Cwd;
 # BZIP2
 # GZIP
 
+my $compression;
 my $output = '';
 my $script = '';
 my $dir = '';
 my @files;
 
+# Check if XZ is available. If not, try BZIP2. If BZIP2 is also not available, then default to GZIP
+# Note 9 means 'the best gzip compression level'
+$compression = eval'COMPRESS_XZ' || eval'COMPRESS_BZIP' || 9;
+
+# Parse options from the command line
 GetOptions(
     'output=s' => \$output,
     'script=s' => \$script,
@@ -51,14 +50,29 @@ GetOptions(
 );
 
 $output ||= 'out.pl';
-my @dirs = ($dir) if $dir;
-find(\&wanted, @dirs);
+$output .= '.pl' if($output !~ /\.pl$/);
 
-my $tar = Archive::Tar->new;
-$tar->create_archive($output, COMPRESS_BZIP, @files);
+if($dir) { my @dirs = ($dir); find(\&wanted, @dirs) }
 
+#my $tar = Archive::Tar->new;
+
+#$tar->create_archive(random_filename(), COMPRESS_GZIP, @files);
+#say $tar->error();
+
+# Sub routine to be used by Find::File
 sub wanted {
     push @files, $File::Find::name
+}
+
+
+# Subroutine to generate random file names
+sub random_filename {
+  my $filename = '';
+  my @chars = ('A' .. 'Z', 'a' .. 'z', '0' .. '9', '-', '_');
+  for(1 .. 16) {
+    $filename .= $chars[ int(rand(@chars))];
+  }
+  return $filename;
 }
 
 
