@@ -14,7 +14,6 @@ use Archive::Tar;
 use MIME::Base64;
 use Getopt::Long;
 use File::Find;
-use Cwd;
 
 # Usage
 # --output Name of the resulting self extracting archive
@@ -25,6 +24,7 @@ use Cwd;
 # If neither --dir nor --files is specified, the list of files is read in from <STDIN>
 
 my $compression;
+my $temp_file = random_filename();              # Generate a random filename to be used
 my $output = '';
 my $script = '';
 my $dir = '';
@@ -42,15 +42,19 @@ GetOptions(
     'files=s{,}' => \@files
 );
 
-$output ||= 'out.pl';             # If --output (or -o) is not specifided, default to 'out.pl'
+$output ||= 'out.pl';             # If --output is not specifided, default to 'out.pl'
 
-# If --dir is specified, get all files from that directory. This needs to be 
+# If --dir is specified, get all files from that directory. This needs to be done
 if($dir) { my @dirs = ($dir); find(\&wanted, @dirs) }
 
-#my $tar = Archive::Tar->new;
-
-#$tar->create_archive(random_filename(), COMPRESS_GZIP, @files);
+my $tar = Archive::Tar->new;
+$tar->create_archive($temp_file, $compression, @files);
 #say $tar->error();
+
+
+open (my $temp_handle, '<', $temp_file);
+binmode $temp_handle;
+
 
 # Sub routine to be used by Find::File
 sub wanted {
