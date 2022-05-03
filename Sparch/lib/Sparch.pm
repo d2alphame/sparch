@@ -8,7 +8,6 @@ our @ISA = qw();
 
 our $VERSION = '0.01';
 
-
 # Preloaded methods go here.
 use Archive::Tar;
 use MIME::Base64;
@@ -16,7 +15,7 @@ use Getopt::Long;
 use File::Find;
 
 # Usage
-# --output Name of the resulting self extracting archive
+# --output Name of the resulting self extracting archive. Sparch automatically attaches the '.pl' extension
 # --script Name of a script to run after decompressing and extracting the archive
 # --files everything after this is taken to be files that are to be in the archive
 # --dir Use this in place of --files if the files are in a directory. 
@@ -42,7 +41,8 @@ GetOptions(
     'files=s{,}' => \@files
 );
 
-$output ||= 'out.pl';             # If --output is not specifided, default to 'out.pl'
+$output ||= 'out';             # If --output is not specifided, default to 'out'
+my $output_file = $output . '.pl';
 
 # If --dir is specified, get all files from that directory. This needs to be done
 if($dir) { my @dirs = ($dir); find(\&wanted, @dirs) }
@@ -52,17 +52,31 @@ $tar->create_archive($temp_file, $compression, @files);
 #say $tar->error();
 
 # Open the "$output" file for writing
-open(my $outfile, '>>', $output) or die "Cannot open $output: $!";
-print $outfile <<"EOF";
+unlink $output_file;                    # First delete the output file if it already exists
+open(my $output_handle, '>>', $output_file) or die "Cannot open $output_file: $!";
+print $output_handle <<"EOF";
 #! /usr/bin/perl
 use v5.30;
 use strict;
 use warnings;
 use Archive::Tar;
+use MIME::Base64;
 
-my \$compression = $compression;
-my \$filename = $temp_file;
+my \$compression = "$compression";
+my \$temp_file = "$temp_file";
+mkdir "$output";
+chdir "$output";
 
+# Open a temporary working file
+open(my \$temp_handle, '>', \$temp_file) or die "Cannot open temporary file: \$!";
+binmode \$temp_handle;
+
+# Base64-decode the data attached to this script
+my \$base64_data = <DATA>;
+print \$temp_handle decode_base64(\$base64_data);
+
+# Decompress and extract the file archive
+Archive::Tar->extract_archive(\$temp_file, \$compression);
 
 # Attached tar archive compressed and base64 encoded
 __DATA__
@@ -73,7 +87,7 @@ EOF
 open (my $temp_handle, '<', $temp_file);
 binmode $temp_handle;
 while(read $temp_handle, my $buffer, 65536) {
-  print $outfile encode_base64($buffer, '');
+  print $output_handle encode_base64($buffer, '');
 }
 
 # Sub routine to be used by Find::File
