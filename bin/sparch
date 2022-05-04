@@ -53,7 +53,10 @@ $output ||= 'out';             # If --output is not specifided, default to 'out'
 my $output_file = $output . '.pl';
 
 # If --dir is specified, get all files from that directory. This needs to be done
-if($dir) { my @dirs = ($dir); find(\&wanted, @dirs) }
+if($dir){ 
+    my @dirs = ($dir);      # This is necessary because 'find' takes an array while we take a scalar
+    find(\&wanted, @dirs)
+}
 
 my $tar = Archive::Tar->new;
 $tar->create_archive($temp_file, $compression, @files);
@@ -101,6 +104,8 @@ while(read $temp_handle, my $buffer, 65536) {
 
 # Sub routine to be used by Find::File
 sub wanted {
+    # Push files found unto the @files array along with the
+    # other files received from the commandline options
     push @files, $File::Find::name
 }
 
