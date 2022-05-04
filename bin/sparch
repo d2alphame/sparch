@@ -40,9 +40,13 @@ GetOptions(
     'files=s{,}' => \@files
 );
 
-unless( $dir || @files) {
-    say 'Specify either --dir or --files or both';
-    exit 1;
+# If dir is not present and files not present, then read list of files from stdin
+unless( $dir || @files ) {
+    my $stdin_file;
+    while($stdin_file = <STDIN>) {
+        chomp $stdin_file;
+        push @files, $stdin_file;
+    }
 }
 
 $output ||= 'out';             # If --output is not specifided, default to 'out'
