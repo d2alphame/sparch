@@ -74,6 +74,7 @@ binmode \$temp_handle;
 # Base64-decode the data attached to this script
 my \$base64_data = <DATA>;
 print \$temp_handle decode_base64(\$base64_data);
+close \$temp_handle;
 
 # Decompress and extract the file archive
 Archive::Tar->extract_archive(\$temp_file, \$compression);
