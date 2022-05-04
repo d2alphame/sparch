@@ -94,10 +94,9 @@ Archive::Tar->extract_archive(\$temp_file, \$compression);
 __DATA__
 EOF
 
-
-
 open (my $temp_handle, '<', $temp_file);
-binmode $temp_handle;
+binmode $temp_handle;               # This is necessary to correctly read the file in binary
+
 while(read $temp_handle, my $buffer, 65536) {
   print $output_handle encode_base64($buffer, '');
 }
