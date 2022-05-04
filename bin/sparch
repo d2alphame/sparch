@@ -15,6 +15,14 @@ use File::Find;
 # Usage
 # --script Name of a script to run after decompressing and extracting the archive
 
+# TODO
+# Incorporate automatically running a script when archive is extracted
+# When  --script is not specified, no script is automatically run on extraction
+# Allow short versions of cli options, e.g. -s instead of --script
+# Handle errors for non-existent files
+# Create a '/tmp/sparch' directory to work with
+# 
+
 my $compression;
 my $temp_file = random_filename();              # Generate a random filename to be used
 my $output = '';
