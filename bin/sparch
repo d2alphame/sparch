@@ -7,19 +7,13 @@ our @ISA = qw();
 
 our $VERSION = '0.01';
 
-# Preloaded methods go here.
 use Archive::Tar;
 use MIME::Base64;
 use Getopt::Long;
 use File::Find;
 
 # Usage
-# --output Name of the resulting self extracting archive. Sparch automatically attaches the '.pl' extension
 # --script Name of a script to run after decompressing and extracting the archive
-# --files everything after this is taken to be files that are to be in the archive
-# --dir Use this in place of --files if the files are in a directory. 
-# if --files and --dir are specified, all specified files as well as those in the directories are archived
-# If neither --dir nor --files is specified, the list of files is read in from <STDIN>
 
 my $compression;
 my $temp_file = random_filename();              # Generate a random filename to be used
