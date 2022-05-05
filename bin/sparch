@@ -97,7 +97,7 @@ Archive::Tar->extract_archive(\$temp_file, \$compression);
 __DATA__
 EOF
 
-open (my $temp_handle, '<', $temp_file);
+open (my $temp_handle, '<', $temp_file) or die "Could not open $temp_file: $!";
 binmode $temp_handle;               # This is necessary to correctly read the file in binary
 
 while(read $temp_handle, my $buffer, 65536) {
