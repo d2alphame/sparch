@@ -7,9 +7,9 @@ our @ISA = qw();
 
 our $VERSION = '0.01';
 
+use Getopt::Long qw(:config no_ignore_case no_auto_abbrev);
 use Archive::Tar;
 use MIME::Base64;
-use Getopt::Long;
 use File::Find;
 
 # Usage
@@ -36,10 +36,10 @@ $compression = eval'COMPRESS_XZ' || eval'COMPRESS_BZIP' || 9;
 
 # Parse options from the command line
 GetOptions(
-    'output=s' => \$output,
-    'script=s' => \$script,
-    'dir=s' => \$dir,
-    'files=s{,}' => \@files
+    'output|o=s' => \$output,
+    'script|s=s' => \$script,
+    'dir|d=s' => \$dir,
+    'files|f=s{,}' => \@files
 );
 
 # If dir is not present and files not present, then read list of files from stdin
