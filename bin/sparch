@@ -60,6 +60,7 @@ if($dir){
     find(\&wanted, @dirs)
 }
 
+# Create the archives
 my $tar = Archive::Tar->new;
 say "Error creating archive: " . $tar->error unless($tar->create_archive($temp_file, $compression, @files));
 
