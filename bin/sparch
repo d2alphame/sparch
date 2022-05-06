@@ -94,6 +94,8 @@ close \$temp_handle;
 # Decompress and extract the file archive
 Archive::Tar->extract_archive(\$temp_file, \$compression);
 
+unlink \$temp_file;
+
 # Attached tar archive compressed and base64 encoded
 __DATA__
 EOF
