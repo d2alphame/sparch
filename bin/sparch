@@ -40,7 +40,7 @@ GetOptions(
     'script|s=s' => \$script,
     'dir|d=s' => \$dir,
     'files|f=s{,}' => \@files
-);
+) or exit 1;
 
 # If dir is not present and files not present, then read list of files from stdin
 unless( $dir || @files ) {
@@ -64,10 +64,10 @@ if($dir){
 my $tar = Archive::Tar->new;
 say "Error creating archive: " . $tar->error unless($tar->create_archive($temp_file, $compression, @files));
 
-
 # Open the "$output" file for writing
 unlink $output_file;                    # First delete the output file if it already exists
 open(my $output_handle, '>>', $output_file) or die "Cannot open $output_file: $!";
+
 
 print $output_handle <<"EOF";
 #! /usr/bin/perl
