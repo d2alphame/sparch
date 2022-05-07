@@ -12,16 +12,6 @@ use Archive::Tar;
 use MIME::Base64;
 use File::Find;
 
-# Usage
-# --script Name of a script to run after decompressing and extracting the archive
-
-# TODO
-# Incorporate automatically running a script when archive is extracted
-# Handle errors for non-existent files
-# Create a '/tmp/sparch' directory to work with
-# Use the /tmp directory at the root
-# Process errors from GetOpts
-
 # Return codes
 sub ERR_SUCCESS { 0 }                 # Success
 sub ERR_TAR { 1 }                     # Error archiving
@@ -155,7 +145,7 @@ __END__
 
 =head1 NAME
 
-Sparch - Perl extension for blah blah blah
+Sparch is a tool for creating self extracting archives
 
 =head1 SYNOPSIS
 
