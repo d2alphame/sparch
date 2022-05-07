@@ -60,6 +60,9 @@ if($dir){
     find(\&wanted, @dirs)
 }
 
+# Command to execute a given script after extraction.
+my $execute_command = $script ? qq(do './$script';) : '';
+
 # Create the archives
 my $tar = Archive::Tar->new;
 say "Could not create archive: " . $tar->error unless($tar->create_archive($temp_file, $compression, @files));
@@ -93,6 +96,8 @@ close \$temp_handle;
 
 # Decompress and extract the file archive
 Archive::Tar->extract_archive(\$temp_file, \$compression);
+
+$execute_command
 
 unlink \$temp_file;
 
