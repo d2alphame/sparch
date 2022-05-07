@@ -17,11 +17,16 @@ use File::Find;
 
 # TODO
 # Incorporate automatically running a script when archive is extracted
-# When  --script is not specified, no script is automatically run on extraction
 # Handle errors for non-existent files
 # Create a '/tmp/sparch' directory to work with
 # Use the /tmp directory at the root
 # Process errors from GetOpts
+
+# Return codes
+sub ERR_SUCCESS { 0 }                 # Success
+sub ERR_TAR { 1 }                     # Error archiving
+sub ERR_OPTIONS_UNRECOGNIZED { 2 }    # Unrecognized options from GetOpt
+sub ERR_FILE_NOENT { 3 }              # File or directory does not exit
 
 my $compression;
 my $temp_file = random_filename();              # Generate a random filename to be used
@@ -40,7 +45,7 @@ GetOptions(
     'script|s=s' => \$script,
     'dir|d=s' => \$dir,
     'files|f=s{,}' => \@files
-) or exit 1;
+) or exit ERR_OPTIONS_UNRECOGNIZED;
 
 # If dir is not present and files not present, then read list of files from stdin
 unless( $dir || @files ) {
@@ -54,14 +59,23 @@ unless( $dir || @files ) {
 $output ||= 'out';             # If --output is not specifided, default to 'out'
 my $output_file = $output . '.pl';
 
+# Check for non-existent files and exit
+my $non_existent = 0;
+if(@files) {
+  for(@files) { 
+    unless(-e) {
+      say "Non existent file $_";
+      $non_existent = 1;
+    }
+  }
+  exit ERR_FILE_NOENT;
+}
+
 # If --dir is specified, get all files from that directory. This needs to be done
 if($dir){ 
     my @dirs = ($dir);      # This is necessary because 'find' takes an array while we take a scalar
     find(\&wanted, @dirs)
 }
-
-# Command to execute a given script after extraction.
-my $execute_command = $script ? qq(do './$script';) : '';
 
 # Create the archives
 my $tar = Archive::Tar->new;
@@ -71,6 +85,8 @@ say "Could not create archive: " . $tar->error unless($tar->create_archive($temp
 unlink $output_file;                    # First delete the output file if it already exists
 open(my $output_handle, '>>', $output_file) or die "Cannot open $output_file: $!";
 
+# Command to execute a given script after extraction.
+my $execute_command = $script ? qq(do './$script';) : '';
 
 print $output_handle <<"EOF";
 #! /usr/bin/perl
