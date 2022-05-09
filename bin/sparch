@@ -11,6 +11,7 @@ use Getopt::Long qw(:config no_ignore_case no_auto_abbrev);
 use Archive::Tar;
 use MIME::Base64;
 use File::Find;
+use Pod::Usage;
 
 # Return codes
 sub ERR_SUCCESS { 0 }                 # Success
@@ -23,6 +24,8 @@ my $temp_file = random_filename();              # Generate a random filename to 
 my $output = '';
 my $script = '';
 my $dir = '';
+my $help = 0;
+my $man = 0;
 my @files;
 
 # Check if XZ is available. If not, try BZIP2. If BZIP2 is also not available, then default to GZIP
@@ -34,8 +37,12 @@ GetOptions(
     'output|o=s' => \$output,
     'script|s=s' => \$script,
     'dir|d=s' => \$dir,
-    'files|f=s{,}' => \@files
-) or exit ERR_OPTIONS_UNRECOGNIZED;
+    'files|f=s{,}' => \@files,
+    'help|?' => \$help
+) or pod2usage(2);
+pod2usage(1) if $help;
+pod2usage(-exitval => 0, -verbose => 2) if $man;
+
 
 # If dir is not present and files not present, then read list of files from stdin
 unless( $dir || @files ) {
