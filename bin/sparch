@@ -38,7 +38,8 @@ GetOptions(
     'script|s=s' => \$script,
     'dir|d=s' => \$dir,
     'files|f=s{,}' => \@files,
-    'help|?' => \$help
+    'help|?' => \$help,
+    'man' => \$man
 ) or pod2usage(2);
 pod2usage(1) if $help;
 pod2usage(-exitval => 0, -verbose => 2) if $man;
