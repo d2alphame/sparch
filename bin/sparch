@@ -153,21 +153,31 @@ __END__
 
 =head1 NAME
 
-Sparch is a tool for creating self extracting archives
+Sparch is a tool for creating self extracting perl archives. The resulting file is a perl script that can be run to extract the 
+files in the archive.
 
 =head1 SYNOPSIS
 
-  use Sparch;
-  blah blah blah
+  sparch --dir path/to/folder --output archive --script script-to-run --files file1 file2
 
 =head1 DESCRIPTION
 
-Stub documentation for Sparch, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
+Sparch uses the following options
 
-Blah blah blah.
+-d --dir
+  The directory that contains the file(s) to archive.
 
+-f --files
+  List of files that should be in the archive. This should be the last option if specified. Everything that follows is taken to be 
+  files to be added to the archive
+
+-o --output
+  Name of the resulting archive file. Sparch attaches .pl to the name specified by this option. The resulting file is an executable 
+  perl script (chmod +x). If this option is not specified, sparch uses out.pl as the name of the resulting archive file.
+
+-s --script
+  A script that is part of the archive which will be executed once the archive has been extracted. The script must be an executable 
+  perl script
 
 =head1 SEE ALSO
 
