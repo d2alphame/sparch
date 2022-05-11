@@ -103,14 +103,15 @@ my \$run = 1;
 my \$keep = 0;
 my \$compression = "$compression";
 my \$temp_file = "$temp_file";
-mkdir "$output";
-chdir "$output";
 
 # Process commandline options
 GetOptions(
   'no-run' => sub{ \$run = 0 },
   'keep' => \\\$keep 
-) or options_error();
+) or (show_options_error() && exit 1);
+
+mkdir "$output";
+chdir "$output";
 
 # Open a temporary working file
 open(my \$temp_handle, '>', \$temp_file) or die "Cannot open temporary file: \$!";
@@ -130,16 +131,18 @@ unlink \$temp_file;
 chdir '..';
 unlink \$0 unless \$keep;
 
-sub options_error {
+sub show_options_error {
   say <<EOHELP;
 USAGE:
   --keep
-    Keep the archive script after extraction. The script is deleted by default
+    Keep the archive after extraction. The script is deleted by default.
 
   --no-run
     Do not run script after extraction. If the archive was created with a --script option,
     the script will be executed after extraction. --no-run prevents the script from running.
 EOHELP
+
+  return 1;
 }
 
 # Attached tar archive compressed and base64 encoded
