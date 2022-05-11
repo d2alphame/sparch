@@ -1,4 +1,9 @@
 #! /usr/bin/perl
+
+# TODO:
+# Delete archive file after extraction
+# Provide options --no-run and --keep when executing the archive
+
 use v5.30;
 use strict;
 use warnings;
@@ -96,11 +101,20 @@ use strict;
 use warnings;
 use Archive::Tar;
 use MIME::Base64;
+use Getopt::Long;
 
+my \$run = 1;
+my \$keep = 0;
 my \$compression = "$compression";
 my \$temp_file = "$temp_file";
 mkdir "$output";
 chdir "$output";
+
+# Process commandline options
+GetOptions(
+  'no-run' => sub{ \$run = 0 },
+  'keep' => \\\$keep 
+);
 
 # Open a temporary working file
 open(my \$temp_handle, '>', \$temp_file) or die "Cannot open temporary file: \$!";
@@ -204,17 +218,9 @@ If neither --dir nor --files is used, then names of files wil be read from STDIN
 Also, --output defaults to 'out.pl'.
 
 
-
 =head1 SEE ALSO
 
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
+Archive::Tar, MIME::Base64, shar(1), tar(1)
 
 
 =head1 AUTHOR
