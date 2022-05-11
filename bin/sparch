@@ -131,6 +131,8 @@ Archive::Tar->extract_archive(\$temp_file, \$compression);
 $execute_command
 
 unlink \$temp_file;
+chdir '..';
+unlink \$0 unless \$keep;
 
 # Attached tar archive compressed and base64 encoded
 __DATA__
@@ -218,9 +220,10 @@ If neither --dir nor --files is used, then names of files will be read from STDI
 Also, --output defaults to 'out.pl'.
 
 
+
 =head1 SEE ALSO
 
-Archive::Tar, MIME::Base64, shar(1), tar(1)
+See the following Perl modules Archive::Tar, MIME::Base64. See also the Unix tools shar(1), tar(1), xz(1), gzip(1), bzip2(1)
 
 
 =head1 AUTHOR
@@ -232,9 +235,8 @@ Deji Adegbite, E<lt>contact@dejiadegbite.comE<gt>
 
 Copyright (C) 2022 by Deji Adegbite
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself, either Perl version 5.30.3 or,
-at your option, any later version of Perl 5 you may have available.
+This library is free software; you can redistribute it and/or modify it under the same terms as Perl itself, either Perl version 
+5.30.3 or, at your option, any later version of Perl 5 you may have available.
 
 
 =cut
