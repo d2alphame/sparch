@@ -219,7 +219,15 @@ If neither --dir nor --files is used, then names of files will be read from STDI
 
 Also, --output defaults to 'out.pl'.
 
+The following options are available when executing the archive script
 
+--keep 
+    Keep the archive after extraction. By default, the generated archive script is deleted after the files in the archive. This 
+    option disables this behaviour and keeps the original archive file after extraction
+
+--no-run
+    If an archive is created with the --script option, the specified script is executed when the archive is extracted. Using this 
+    option prevents the script from running.
 
 =head1 SEE ALSO
 
