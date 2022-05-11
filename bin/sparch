@@ -77,7 +77,10 @@ if($dir){
 
 # Create the archives
 my $tar = Archive::Tar->new;
-say "Could not create archive: " . $tar->error unless($tar->create_archive($temp_file, $compression, @files));
+unless($tar->create_archive($temp_file, $compression, @files)) {
+  say "Could not create archive: " . $tar->error;
+  exit ERR_TAR;
+}
 
 # Open the "$output" file for writing
 unlink $output_file;                    # First delete the output file if it already exists
