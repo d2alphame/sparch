@@ -1,9 +1,5 @@
 #! /usr/bin/perl
 
-# TODO:
-# Delete archive file after extraction
-# Provide options --no-run and --keep when executing the archive
-
 use v5.30;
 use strict;
 use warnings;
