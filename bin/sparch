@@ -38,7 +38,7 @@ GetOptions(
     'script|s=s' => \$script,
     'dir|d=s' => \$dir,
     'files|f=s{,}' => \@files,
-    'help|?' => \$help,
+    'help|h|?' => \$help,
     'man' => \$man
 ) or pod2usage(2);
 pod2usage(1) if $help;
@@ -149,7 +149,6 @@ sub random_filename {
 }
 
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
@@ -159,17 +158,24 @@ files in the archive.
 =head1 SYNOPSIS
 
   sparch --dir path/to/folder --output archive --script script-to-run --files file1 file2
+  sparch --help
 
 =head1 DESCRIPTION
 
-Sparch uses the following options
+Sparch is used for creating self-extracting perl archives. The archive itself is created and compressed using Archive::Tar. The 
+resulting archive is then base64 encoding using MIME::Base64 and attached to a perl script. 
+
+=head1 OPTIONS
+
+-h --help
+    Displays usage help
 
 -d --dir
-  The directory that contains the file(s) to archive.
+    The directory that contains the file(s) to archive.
 
 -f --files
-  List of files that should be in the archive. This should be the last option if specified. Everything that follows is taken to be 
-  files to be added to the archive
+    List of files that should be in the archive. This should be the last option if specified. Everything that follows is taken to be 
+    files to be added to the archive
 
 -o --output
   Name of the resulting archive file. Sparch attaches .pl to the name specified by this option. The resulting file is an executable 
