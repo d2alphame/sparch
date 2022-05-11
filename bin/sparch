@@ -110,7 +110,7 @@ chdir "$output";
 GetOptions(
   'no-run' => sub{ \$run = 0 },
   'keep' => \\\$keep 
-);
+) or options_error();
 
 # Open a temporary working file
 open(my \$temp_handle, '>', \$temp_file) or die "Cannot open temporary file: \$!";
@@ -129,6 +129,18 @@ $execute_command
 unlink \$temp_file;
 chdir '..';
 unlink \$0 unless \$keep;
+
+sub options_error {
+  say <<EOHELP;
+USAGE:
+  --keep
+    Keep the archive script after extraction. The script is deleted by default
+
+  --no-run
+    Do not run script after extraction. If the archive was created with a --script option,
+    the script will be executed after extraction. --no-run prevents the script from running.
+EOHELP
+}
 
 # Attached tar archive compressed and base64 encoded
 __DATA__
