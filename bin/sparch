@@ -66,7 +66,7 @@ if(@files) {
       $non_existent = 1;
     }
   }
-  exit ERR_FILE_NOENT;
+  exit ERR_FILE_NOENT if $non_existent;
 }
 
 # If --dir is specified, get all files from that directory. This needs to be done
@@ -179,8 +179,8 @@ If --script was specified during the creation of the archive, the specified scri
     The directory that contains the file(s) to archive.
 
 -f --files
-    List of files that should be in the archive. This should be the last option if specified. Everything that follows is taken to be 
-    files to be added to the archive
+    List of files that should be in the archive. This should be the last option if specified. Everything that follows is taken to 
+    be files to be added to the archive
 
 -h --help
     Displays usage help
@@ -192,6 +192,14 @@ If --script was specified during the creation of the archive, the specified scri
 -s --script
   A script that is part of the archive which will be executed once the archive has been extracted. The script must be an executable 
   perl script
+
+If both --dir and --files are used, all the files in the directory and all the files specified --files will be added into the 
+archive.
+
+If neither --dir nor --files is used, then names of files wil be read from STDIN.
+
+Also, --output defaults to 'out.pl'.
+
 
 
 =head1 SEE ALSO
