@@ -1,5 +1,9 @@
 #! /usr/bin/perl
 
+# TODO: 
+# Add example usage to pod documentation
+# Begin README
+
 use v5.30;
 use strict;
 use warnings;
@@ -38,7 +42,7 @@ GetOptions(
     'output|o=s' => \$output,
     'script|s=s' => \$script,
     'dir|d=s' => \$dir,
-    'files|f=s{,}' => \@files,
+    'files|f=s{1,}' => \@files,
     'help|h|?' => \$help,
     'man' => \$man
 ) or pod2usage(2);
