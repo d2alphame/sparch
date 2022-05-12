@@ -244,6 +244,25 @@ The following options are available when executing the archive script
     If an archive is created with the --script option, the specified script is executed when the archive is extracted. Using this 
     option prevents the script from running.
 
+
+=head1 EXAMPLES
+
+The following example will create an archive consisting of the files aang katara sokka toph zuko
+  
+    sparch --files aang katara sokka toph zuko
+
+In the above example, because --output was not specified, the resulting archive will be named out.pl
+
+Note that --files should always be last whenever it's present. That's because everything after it is taken to be the name of a file 
+to be included in the archive.
+
+The following will create an archive from the files specified by --dir. Note that the operation is recursive so files in sub 
+directories are included
+
+    sparch --dir benders
+
+Just like the previous example, the name of the resulting archive file will be out.pl because the --output option was not used.
+
 =head1 SEE ALSO
 
 See the following Perl modules Archive::Tar, MIME::Base64. See also the Unix tools shar(1), tar(1), xz(1), gzip(1), bzip2(1)
