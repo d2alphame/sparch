@@ -263,6 +263,39 @@ directories are included
 
 Just like the previous example, the name of the resulting archive file will be out.pl because the --output option was not used.
 
+The next example makes use of both --dir and --files. All files in the directory and all files specified by --files will be added 
+to the archive
+
+    sparch --dir benders --files aang katara sokka toph zuko
+
+If neither --dir nor --files is specified, then files will be read in from STDIN. For example
+
+    sparch --output the-gaang
+    aang
+    katara
+    sokka
+    toph
+    zuko
+    ^X
+
+Note that in the above example, because --output the-gaang was specified, the resulting archive file will be named the-gaang.pl
+
+To run a script after extraction, specify the name of the script while creating the archive. The script must be part of the archive
+
+    sparch --script tear-bending --output the-gaang
+    aang
+    katara
+    sokka
+    toph
+    zuko
+    tear-bending
+    ^X
+
+It should be noted that the user extracting the archive might decide not to let the script run by using the --no-run option when 
+extracting the archive
+
+
+
 =head1 SEE ALSO
 
 See the following Perl modules Archive::Tar, MIME::Base64. See also the Unix tools shar(1), tar(1), xz(1), gzip(1), bzip2(1)
