@@ -1,6 +1,7 @@
 #! /usr/bin/perl
 
-# TODO: 
+# TODO:
+# Catch permission errors on extraction
 # Add example usage to pod documentation
 # Begin README
 
@@ -130,6 +131,9 @@ close \$temp_handle;
 Archive::Tar->extract_archive(\$temp_file, \$compression);
 
 $execute_command
+if(\$!) {
+  die "\$!\\n";
+}
 
 unlink \$temp_file;
 chdir '..';
