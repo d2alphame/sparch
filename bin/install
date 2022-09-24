@@ -9,6 +9,7 @@ use File::Copy;
 # the sparch perl script to /usr/local/bin
 
 my $destination_directory = "/usr/local/bin";
+my $file_to_copy = "sparch";
 
 unless (-d $destination_directory) {
 	say "The default installation directory $destination_directory does not exist.";
@@ -21,5 +22,6 @@ unless(-d $destination_directory) {
 	say "Create the directory and try again";
 	say "Stopping installation"; exit 1
 }
-chmod 0755, "sparch";
-copy("sparch", $destination_directory) or die "Could not install sparch in $destination_directory: $!\n";
+
+copy($file_to_copy, $destination_directory) or die "Could not install $file_to_copy in $destination_directory: $!\n";
+chmod 0755, "$destination_directory/$file_to_copy";
