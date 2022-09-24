@@ -3,6 +3,22 @@
 use v5.30;
 use strict;
 use warnings;
+use File::Copy;
 
 # This is the sparch installation file. It's a simple script that copies the
 # the sparch perl script to /usr/local/bin
+
+my $destination_directory = "/usr/local/bin";
+
+unless (-d $destination_directory) {
+	say "The default installation directory $destination_directory does not exist.";
+	print "Specify a different directory for installation: ";
+	$destination_directory = <STDIN>;
+	chomp $destination_directory;
+}
+unless(-d $destination_directory) {
+	say "The directory you specified does not exist";
+	say "Create the directory and retry again";
+	say "Stopping installation"; exit 1
+}
+copy("sparch", $destination_directory) or die "Could not install sparch in $destination_directory: $!\n";
