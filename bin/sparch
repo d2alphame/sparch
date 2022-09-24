@@ -295,7 +295,6 @@ It should be noted that the user extracting the archive might decide not to let 
 extracting the archive
 
 
-
 =head1 SEE ALSO
 
 See the following Perl modules Archive::Tar, MIME::Base64. See also the Unix tools shar(1), tar(1), xz(1), gzip(1), bzip2(1)
