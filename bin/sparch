@@ -1,6 +1,8 @@
 #! /usr/bin/perl
 
 # TODO: 
+# Extract files in the /tmp directory
+# Catch permission errors on extraction
 # Add example usage to pod documentation
 # Begin README
 
