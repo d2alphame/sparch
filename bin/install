@@ -1,0 +1,8 @@
+#! /usr/bin/perl
+
+use v5.30;
+use strict;
+use warnings;
+
+# This is the sparch installation file. It's a simple script that copies the
+# the sparch perl script to /usr/local/bin
