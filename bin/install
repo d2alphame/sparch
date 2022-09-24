@@ -18,7 +18,8 @@ unless (-d $destination_directory) {
 }
 unless(-d $destination_directory) {
 	say "The directory you specified does not exist";
-	say "Create the directory and retry again";
+	say "Create the directory and try again";
 	say "Stopping installation"; exit 1
 }
+chmod 0755, "sparch";
 copy("sparch", $destination_directory) or die "Could not install sparch in $destination_directory: $!\n";
