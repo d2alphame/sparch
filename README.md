@@ -20,7 +20,7 @@ The above example reads the files `aang`, `katara`, `sokka`, `toph`, and `zuko` 
 
 Sparch can also be invoked in the following ways
 ```
-sparch --dir /path/to/folder --output archive --script ./script-to-run --files file1, file2, file3
+sparch --dir /path/to/folder --output archive --script ./script-to-run --files file1 file2 file3
 sparch --help
 ```
 In the above examples `--dir` is used to specify a directory that contains files to be added to the resulting archive. `--files` is also specified listing out files to be added to the archive. The `--output` option specifies the name of the resulting archive in this case, `archive`. Sparch will name the output file `archive.pl`.
