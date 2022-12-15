@@ -231,7 +231,7 @@ If --script was specified during the creation of the archive, the specified scri
   A script that is part of the archive which will be executed once the archive has been extracted. The script must be an executable 
   perl script
 
-If both --dir and --files are used, all the files in the directory and all the files specified --files will be added into the 
+If both --dir and --files are used, all the files in the directory and all the files specified by --files will be added into the 
 archive.
 
 If neither --dir nor --files is used, then names of files will be read from STDIN.
@@ -241,7 +241,7 @@ Also, --output defaults to 'out.pl'.
 The following options are available when executing the archive script
 
 --keep 
-    Keep the archive after extraction. By default, the generated archive script is deleted after the files in the archive. This 
+    Keep the archive after extraction. By default, the generated archive script is deleted after the files in the archive have been extracted. This 
     option disables this behaviour and keeps the original archive file after extraction
 
 --no-run

@@ -40,5 +40,28 @@ The following are options that are available with sparch.
 ### `-d --dir`
 The directory that contains the files to archive.
 
-### -f --files
-List of files that should be in the archive. 
+### `-f --files`
+List of files that should be in the archive.
+
+### `-h --help`
+Displays usage help.
+
+### `-o --output`
+Name of the resulting archive file. Sparch attaches '.pl' to the name specified by this option. The resulting file is an executable perl script (chmod +x). If this option is not specified, sparch uses 'out.pl' as the name of the resulting archive file.
+
+### `-s --script`
+A script that is part of the archive which will be executed once the archive has been extracted. The script must be an executable perl script.
+
+If both `--dir` and `--files` is used, all the files in the directory and all the files specified by `--files` will be added into the archive.
+
+If neither `--dir` nor `--files` is used, then names of files will be read from STDIN.
+
+Also `--output` defaults to `out.pl`.
+
+The following options are available when executing the archive script.
+
+### `--keep`
+Keep the archive after extraction. By default, the generated archive script is deleted after the files in the archive have been extracted. This option disables this behaviour and keeps the original archive file after extraction.
+
+### `--no-run`
+If an archive is created with the `--script` option, the specified script is executed when the archive is extracted. Using this option prevents the script from running.
