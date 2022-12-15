@@ -52,12 +52,14 @@ Name of the resulting archive file. Sparch attaches '.pl' to the name specified 
 ### `-s --script`
 A script that is part of the archive which will be executed once the archive has been extracted. The script must be an executable perl script.
 
+## Things to note
 If both `--dir` and `--files` is used, all the files in the directory and all the files specified by `--files` will be added into the archive.
 
 If neither `--dir` nor `--files` is used, then names of files will be read from STDIN.
 
 Also `--output` defaults to `out.pl`.
 
+## Options for extraction
 The following options are available when executing the archive script.
 
 ### `--keep`
