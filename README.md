@@ -23,4 +23,11 @@ Sparch can also be invoked in the following ways
 sparch --dir /path/to/folder --output archive --script ./script-to-run --files file1, file2, file3
 sparch --help
 ```
-In the above examples `--dir` is used to specify a directory that contains files to be added to the resulting archive. `--files` is also specified listing out files to be added to the archive. The `--output` option specifies the name of the resulting archive in this `archive`. Sparch will name the output file `archive.pl`.
+In the above examples `--dir` is used to specify a directory that contains files to be added to the resulting archive. `--files` is also specified listing out files to be added to the archive. The `--output` option specifies the name of the resulting archive in this case, `archive`. Sparch will name the output file `archive.pl`.
+
+The `--help` option is used to get help.
+
+## Description
+Sparch is written in Perl and is used for creating self-extracting Perl archives. The archive itself is created and compressed using the module Archive::Tar. The resulting archive is then base64-encoded in using MIME::Base64 and attached to a perl script.
+
+When creating the archive, sparch first attempts to use xz compression. If xz is not available, then it tries bzip, and if that, too, is unavailable, it defaults to gzip.
