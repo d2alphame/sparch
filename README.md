@@ -53,7 +53,7 @@ Name of the resulting archive file. Sparch attaches '.pl' to the name specified 
 A script that is part of the archive which will be executed once the archive has been extracted. The script must be an executable perl script.
 
 ## Things to note
-If both `--dir` and `--files` is used, all the files in the directory and all the files specified by `--files` will be added into the archive.
+If both `--dir` and `--files` are used, all the files in the directory and all the files specified by `--files` will be added into the archive.
 
 If neither `--dir` nor `--files` is used, then names of files will be read from STDIN.
 
@@ -97,3 +97,17 @@ toph
 zuko
 ^X
 ```
+In the above example, because `--output the-gaang` was specified, the resulting archive file will be named the-gaang.pl.
+
+To run a script after extraction, specify the name of the script while creating the archive. The script must be part of the archive
+```
+sparch --script tear-bending --output the-gaang
+aang
+katara
+sokka
+toph
+zuko
+tear-bending
+^X
+```
+The user extracting the archive might decide not to let the script run by using the `--no-run` option when extracting the archive.

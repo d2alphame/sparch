@@ -282,7 +282,7 @@ If neither --dir nor --files is specified, then files will be read in from STDIN
     zuko
     ^X
 
-Note that in the above example, because --output the-gaang was specified, the resulting archive file will be named the-gaang.pl
+In the above example, because --output the-gaang was specified, the resulting archive file will be named the-gaang.pl
 
 To run a script after extraction, specify the name of the script while creating the archive. The script must be part of the archive
 
