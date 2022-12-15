@@ -208,7 +208,7 @@ resulting archive is then base64-encoded using MIME::Base64 and attached to a pe
 When creating the archive, sparch first attempts to use XZ compression. If XZ is not available then it uses BZIP, and if BZIP is 
 not available, it defaults to gzip.
 
-If --script was specified during the creation of the archive, the specified script will be executed upon extraction.
+If --script was specified during the creation of the archive, the specified script will run upon extraction.
 
 
 =head1 OPTIONS

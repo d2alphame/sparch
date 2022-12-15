@@ -1,5 +1,5 @@
 # Sparch
-Sparch is a tool for creating [self extracting archives](https://en.wikipedia.org/wiki/Self-extracting_archive) Perl archives. When an archive is created, the result is an executable Perl script with the archive attached to it. Running the script decompresses and extracts the archive. Sparch also supports running a script on extraction.
+Sparch is a tool for creating [self extracting archives](https://en.wikipedia.org/wiki/Self-extracting_archive) in Perl. When an archive is created, the result is an executable Perl script with the archive attached to it. Running the script decompresses and extracts the archive. Sparch also supports running a script on extraction.
 
 ## Using Sparch
 The simplest invocation of sparch is
@@ -28,11 +28,11 @@ In the above examples `--dir` is used to specify a directory that contains files
 The `--help` option is used to get help.
 
 ## Description
-Sparch is written in Perl and is used for creating self-extracting Perl archives. The archive itself is created and compressed using the module Archive::Tar. The resulting archive is then base64-encoded in using MIME::Base64 and attached to a perl script.
+Sparch is written in Perl and is used for creating self-extracting Perl archives. The archive itself is created and compressed using the module Archive::Tar. The resulting archive is then base64-encoded in MIME::Base64 and attached to a perl script.
 
 When creating the archive, sparch first attempts to use xz compression. If xz is not available, then it tries bzip, and if that, too, is unavailable, it defaults to gzip.
 
-If `--script` was used during the creation of the archive, the specified script will be extracted upon extraction.
+If `--script` was used during the creation of the archive, the specified script will run upon extraction.
 
 ## Options
 The following are options that are available with sparch.
