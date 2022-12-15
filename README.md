@@ -67,3 +67,17 @@ Keep the archive after extraction. By default, the generated archive script is d
 
 ### `--no-run`
 If an archive is created with the `--script` option, the specified script is executed when the archive is extracted. Using this option prevents the script from running.
+
+## Examples
+The following example will create an archive consisting of the files aang, katara, sokka, toph, zuko
+```
+sparch --files aang katara sokka toph zuko
+```
+In the above example, because `--output` was not specified, the resulting archive will be named `out.pl`.
+
+Note that `--files` should always be last whenever it is present. That is because everything after it is taken to be the name of a file to be included in the archive.
+
+The following will create an archive from the files specified by `--dir`. Note that the operation recursive so files in subdirectories are included.
+```
+sparch --dir benders
+```
