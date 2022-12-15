@@ -1,10 +1,5 @@
 #! /usr/bin/perl
 
-# TODO:
-# Catch permission errors on extraction
-# Add example usage to pod documentation
-# Begin README
-
 use v5.30;
 use strict;
 use warnings;
