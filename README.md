@@ -77,7 +77,23 @@ In the above example, because `--output` was not specified, the resulting archiv
 
 Note that `--files` should always be last whenever it is present. That is because everything after it is taken to be the name of a file to be included in the archive.
 
-The following will create an archive from the files specified by `--dir`. Note that the operation recursive so files in subdirectories are included.
+The following will create an archive from the files specified by `--dir`. Note that the operation is recursive so files in subdirectories are included.
 ```
 sparch --dir benders
+```
+Just like with the previous example, the name of the resulting archive file will be `out.pl` because the `--output` option was not used.
+
+The next example makes use of both `--dir` and `--files`. All files in the directory and all files specified by `--files` will be added to the archive.
+```
+sparch --dir benders --files aang katara sokka toph zuko
+```
+If neither `--dir` nor `--files` is specified, then files will be read in from STDIN. For example
+```
+sparch --output the-gaang
+aang
+katara
+sokka
+toph
+zuko
+^X
 ```
