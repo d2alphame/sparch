@@ -33,3 +33,12 @@ Sparch is written in Perl and is used for creating self-extracting Perl archives
 When creating the archive, sparch first attempts to use xz compression. If xz is not available, then it tries bzip, and if that, too, is unavailable, it defaults to gzip.
 
 If `--script` was used during the creation of the archive, the specified script will be extracted upon extraction.
+
+## Options
+The following are options that are available with sparch.
+
+### `-d --dir`
+The directory that contains the files to archive.
+
+### -f --files
+List of files that should be in the archive. 
