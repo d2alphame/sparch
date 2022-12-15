@@ -9,4 +9,14 @@ The simplest invocation of sparch is
 ```
 sparch
 ```
-Used in the above form, (without any options) filenames of files that make up that archive are read from STDIN. The output file `out.pl` (the default) is created. The output file can then be executed to (decompress and) extract the archive.
+Used in the above form, (without any options) names of files that make up the archive are read from STDIN. The output file `out.pl` (the default) is created. The output file can then be executed to (decompress and) extract the archive. For example
+```
+sparch
+aang
+katara
+sokka
+toph
+zuko
+^X
+```
+The above example reads the files `aang`, `katara`, `sokka`, `toph`, and `zuko` from the STDIN. The output file `out.pl` is created which contains the files in the archive.
