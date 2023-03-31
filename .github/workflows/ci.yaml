@@ -11,9 +11,9 @@ jobs:
         uses: actions/checkout@v3
       - 
         name: Build sparch and push back into the repository
-        run: /usr/bin/perl --version
-        #run: |
-        #  curl https://raw.githubusercontent.com/d2alphame/main/bin/sparch > sparch
+        run: |
+          curl https://raw.githubusercontent.com/d2alphame/main/bin/sparch > sparch
+          ls
         #  curl https://raw.githubusercontent.com/d2alphame/main/bin/install > install
         #  chmod +x install
         #  ./install
