@@ -11,12 +11,13 @@ jobs:
         uses: actions/checkout@v3
       - 
         name: Build sparch and push back into the repository
-        run: |
-          curl https://raw.githubusercontent.com/d2alphame/main/bin/sparch > sparch
-          curl https://raw.githubusercontent.com/d2alphame/main/bin/install > install
-          chmod +x install
-          ./install
-          sparch --output sparch --script install --files install sparch
-          git add sparch.pl
-          git commit -am "Latest build"
-          git push
+        run: perl --version
+        #run: |
+        #  curl https://raw.githubusercontent.com/d2alphame/main/bin/sparch > sparch
+        #  curl https://raw.githubusercontent.com/d2alphame/main/bin/install > install
+        #  chmod +x install
+        #  ./install
+        #  sparch --output sparch --script install --files install sparch
+        #  git add sparch.pl
+        #  git commit -am "Latest build"
+        #  git push
