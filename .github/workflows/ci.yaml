@@ -1,0 +1,16 @@
+on: push
+  branches: [devel]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+        curl https://raw.githubusercontent.com/d2alphame/main/bin/sparch > sparch
+        curl https://raw.githubusercontent.com/d2alphame/main/bin/install > install
+        chmod +x install
+        ./install
+        sparch --output sparch --script install --files install sparch
+        git add sparch.pl
+        git commit -am "Latest build"
+        git push
