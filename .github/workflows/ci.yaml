@@ -14,8 +14,9 @@ jobs:
         run: |
           curl https://raw.githubusercontent.com/d2alphame/main/bin/sparch > sparch
           curl https://raw.githubusercontent.com/d2alphame/main/bin/install > install
-          chmod +x install
-          ls -al
+          cat install
+        #  chmod +x install
+        #  ls -al
         #  ./install
         #  sparch --output sparch --script install --files install sparch
         #  git add sparch.pl
