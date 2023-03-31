@@ -12,13 +12,11 @@ jobs:
       - 
         name: Build sparch and push back into the repository
         run: |
-          curl https://raw.githubusercontent.com/d2alphame/main/bin/sparch > sparch
-          curl https://raw.githubusercontent.com/d2alphame/main/bin/install > install
-          cat install
-        #  chmod +x install
-        #  ls -al
-        #  ./install
-        #  sparch --output sparch --script install --files install sparch
-        #  git add sparch.pl
-        #  git commit -am "Latest build"
-        #  git push
+          curl https://raw.githubusercontent.com/d2alphame/sparch/main/bin/sparch > sparch
+          curl https://raw.githubusercontent.com/d2alphame/sparch/main/bin/install > install
+          chmod +x install
+          ./install
+          sparch --output sparch --script install --files install sparch
+          git add sparch.pl
+          git commit -am "Latest build"
+          git push
