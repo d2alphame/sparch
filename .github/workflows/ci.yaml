@@ -1,0 +1,24 @@
+name: Build sparch
+on:
+  push:
+    branches: [devel]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout the code
+        uses: actions/checkout@v3
+      - 
+        name: Build sparch and push back into the repository
+        run: |
+          curl https://raw.githubusercontent.com/d2alphame/sparch/main/bin/sparch > sparch
+          curl https://raw.githubusercontent.com/d2alphame/sparch/main/bin/install > install
+          chmod +x install
+          ./install
+          sparch --output sparch --script install --files install sparch
+          git config --global user.name "CI"
+          git config --global user.email "d2alphame@yahoo.com"
+          git add sparch.pl
+          git commit -am "Latest build"
+          git push
