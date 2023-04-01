@@ -1,6 +1,20 @@
 # Sparch
 Sparch is a tool for creating [self extracting archives](https://en.wikipedia.org/wiki/Self-extracting_archive) in Perl. When an archive is created, the result is an executable Perl script with the archive attached to it. Running the script decompresses and extracts the archive. Sparch also supports running a script on extraction.
 
+Sparch is itself distributed as a sparch archive.
+
+## Installing Sparch
+Use `curl` to download sparch, make it executable, and run it.
+```
+curl https://raw.githubusercontent.com/d2alphame/sparch/devel/sparch.pl > sparch
+chmod +x sparch
+./sparch
+```
+To test your installation run
+```
+sparch
+```
+
 ## Using Sparch
 The simplest invocation of sparch is
 ```
