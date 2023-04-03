@@ -12,7 +12,7 @@ chmod +x sparch
 ```
 To test your installation run
 ```
-sparch
+sparch --help
 ```
 
 ## Using Sparch
