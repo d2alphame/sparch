@@ -138,7 +138,7 @@ sub show_options_error {
   say <<EOHELP;
 USAGE:
   --keep
-    Keep the archive after extraction. The script is deleted by default.
+    Keep the archive after extraction. By default the original archive is deleted after extraction.
 
   --no-run
     Do not run script after extraction. If the archive was created with a --script option,
