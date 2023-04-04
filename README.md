@@ -4,11 +4,11 @@ Sparch is a tool for creating [self extracting archives](https://en.wikipedia.or
 Sparch is itself distributed as a sparch archive.
 
 ## Installing Sparch
-Use `curl` to download sparch, make it executable, and run it.
+Use `curl` to download sparch, make it executable, and run it. The installer requires the use of `sudo` as it installs sparch in `/usr/local/bin` by default.
 ```
 curl https://raw.githubusercontent.com/d2alphame/sparch/devel/sparch.pl > sparch
 chmod +x sparch
-./sparch
+sudo ./sparch
 ```
 To test your installation run
 ```
