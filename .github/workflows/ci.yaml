@@ -16,7 +16,7 @@ jobs:
           curl https://raw.githubusercontent.com/d2alphame/sparch/devel/bin/install > install
           chmod +x install
           ./install
-          sparch --output sparch --chdir bin --script bin/install --files bin/install bin/sparch
+          sparch --output sparch --chdir bin --script install --files bin/install bin/sparch
           git config --global user.name "CI"
           git config --global user.email "d2alphame@yahoo.com"
           git add sparch.pl
