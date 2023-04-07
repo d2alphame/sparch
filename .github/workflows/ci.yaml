@@ -22,5 +22,6 @@ jobs:
           git config --global user.email "d2alphame@yahoo.com"
           git add sparch.pl
           git commit -am "Build $(git rev-parse --short HEAD)"
+          git branch --set-upstream-to=origin/next next
           git pull
           git push --set-upstream origin next
