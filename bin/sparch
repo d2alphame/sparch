@@ -212,6 +212,10 @@ If --script was specified during the creation of the archive, the specified scri
 
 =head1 OPTIONS
 
+-c --chdir
+    The directory where the script specified by --script is located. On extraction, sparch changes to this directory to
+    run the script. This directory is relative to the direcory of the archive.
+
 -d --dir
     The directory that contains the file(s) to archive.
 
