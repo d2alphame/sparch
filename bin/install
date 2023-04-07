@@ -23,5 +23,7 @@ unless(-d $destination_directory) {
 	say "Stopping installation"; exit 1
 }
 
-copy($file_to_copy, $destination_directory) or die "Could not install $file_to_copy in $destination_directory: $!\n";
+unless(copy($file_to_copy, $destination_directory)) {
+	return "Could not copy $file_to_copy to $destination_directory"
+}
 chmod 0755, "$destination_directory/$file_to_copy";
