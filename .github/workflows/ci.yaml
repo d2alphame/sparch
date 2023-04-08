@@ -19,8 +19,8 @@ jobs:
           sparch --output sparch --chdir bin --script install --files bin/install bin/sparch
           git config --global user.name "CI"
           git config --global user.email "d2alphame@yahoo.com"
-          git commit -am "Build $(git rev-parse --short HEAD)"
+          git stash
           git fetch origin next
           git checkout next
-          git merge devel --allow-unrelated-histories
+          git pop
           git push
