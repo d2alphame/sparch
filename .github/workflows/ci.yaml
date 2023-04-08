@@ -19,11 +19,9 @@ jobs:
           sparch --output sparch --chdir bin --script install --files bin/install bin/sparch
           git config --global user.name "CI"
           git config --global user.email "d2alphame@yahoo.com"
-          git fetch next
+          git fetch origin next
           git checkout next
           git add sparch.pl
           git commit -am "Build $(git rev-parse --short HEAD)"
-          git fetch
-          git branch --set-upstream-to=origin/next next
           git pull
-          git push --set-upstream origin next
+          git push
