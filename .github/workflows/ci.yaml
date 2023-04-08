@@ -22,4 +22,4 @@ jobs:
           git commit -am "Build $(git rev-parse --short HEAD)"
           git fetch origin next
           git checkout next
-          git merge -X theirs devel
+          git merge -X theirs --allow-unrelated-histories devel
