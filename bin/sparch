@@ -90,9 +90,9 @@ unlink $output_file;                    # First delete the output file if it alr
 open(my $output_handle, '>>', $output_file) or die "Cannot open $output_file: $!";
 
 # Command to execute a given script after extraction.
-my $change_directory = $script && $chdir ? qq[my $current_dir = getcwd(); chdir '$chdir';] : '';
+my $change_directory = $script && $chdir ? qq[my \$curr_dir = getcwd(); chdir $chdir;] : '';
 my $execute_command = $script ? qq(my \$done = do './$script' if \$run;) : '';
-my $return_directory = $change_directory ? qq(chdir $current_dir;) : '';
+my $return_directory = $change_directory ? qq(chdir \$curr_dir;) : '';
 
 print $output_handle <<"EOF";
 #! /usr/bin/perl
@@ -135,7 +135,7 @@ $execute_command
 if(\$!) {
   die "\$done: \$!\\n";
 }
-$return_dir
+$return_directory
 
 unlink \$temp_file;
 chdir '..';
