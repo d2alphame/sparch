@@ -17,9 +17,10 @@ jobs:
           chmod +x install
           ./install
           sparch --output sparch --chdir bin --script install --files bin/install bin/sparch
-          git checkout next
           git config --global user.name "CI"
           git config --global user.email "d2alphame@yahoo.com"
+          git fetch next
+          git checkout next
           git add sparch.pl
           git commit -am "Build $(git rev-parse --short HEAD)"
           git fetch
