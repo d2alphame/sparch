@@ -90,17 +90,19 @@ unlink $output_file;                    # First delete the output file if it alr
 open(my $output_handle, '>>', $output_file) or die "Cannot open $output_file: $!";
 
 # Command to execute a given script after extraction.
-my $change_directory = $chdir ? qq(chdir '$chdir';) : '';
+my $change_directory = $script && $chdir ? qq[my \$curr_dir = getcwd(); chdir '$chdir';] : '';
 my $execute_command = $script ? qq(my \$done = do './$script' if \$run;) : '';
+my $return_directory = $change_directory ? qq(chdir \$curr_dir;) : '';
 
 print $output_handle <<"EOF";
 #! /usr/bin/perl
 use v5.30;
-use strict;
+use strict; 
 use warnings;
 use Archive::Tar;
 use MIME::Base64;
 use Getopt::Long;
+use Cwd;
 
 my \$run = 1;
 my \$keep = 0;
@@ -133,6 +135,7 @@ $execute_command
 if(\$!) {
   die "\$done: \$!\\n";
 }
+$return_directory
 
 unlink \$temp_file;
 chdir '..';
@@ -211,6 +214,10 @@ If --script was specified during the creation of the archive, the specified scri
 
 
 =head1 OPTIONS
+
+-c --chdir
+    The directory where the script specified by --script is located. On extraction, sparch changes to this directory to
+    run the script. This directory is relative to the direcory of the archive.
 
 -d --dir
     The directory that contains the file(s) to archive.

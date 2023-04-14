@@ -51,6 +51,10 @@ If `--script` was used during the creation of the archive, the specified script 
 ## Options
 The following are options that are available with sparch.
 
+### `-c --chdir`
+The directory that contains the script to run on extraction. Sparch changes to this directory before running the script.
+This directory is relative to the directory of the archive
+
 ### `-d --dir`
 The directory that contains the files to archive.
 
